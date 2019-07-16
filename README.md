@@ -1,13 +1,22 @@
 # latent-siblings
 An attempt to generate latent siblings faces by Machine Learning.
 
-- [How to prepare datasets](#How-to-prepare-datasets)
-  - [TSKinFace](#TSKinFace)
-    - [Download](#Download)
+- [How to](#How-to)
+  - [Setup](#Setup)
+  - [Prepare datasets](#Prepare-datasets)
+    - [TSKinFace](#TSKinFace)
+      - [Download](#Download)
 
-## How to prepare datasets
+## How to
+### Setup
 
-### TSKinFace
+```
+pip install -r requirements.txt
+```
+
+### Prepare datasets
+
+#### TSKinFace
 
 Tri-subject Kinship Face Database.
 
@@ -18,5 +27,5 @@ Tri-subject Kinship Face Database.
 > 
 > Xiaoqian Qin, Xiaoyang Tan,Songcan Chen, Tri-Subject Kinship Verification: Understanding the Core of A Family.  IEEE Transactions on Multimedia, 2015
 
-#### Download
+##### Download
 Download [here](http://parnec.nuaa.edu.cn/xtan/data/datasets/TSKinFace_Data.zip).

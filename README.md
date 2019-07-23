@@ -1,11 +1,13 @@
 # latent-siblings
 An attempt to generate latent siblings faces by Machine Learning.
 
-- [How to](#How-to)
-  - [Setup](#Setup)
-  - [Prepare datasets](#Prepare-datasets)
-    - [TSKinFace](#TSKinFace)
-      - [Download](#Download)
+- [How to](#how-to)
+  - [Setup](#setup)
+  - [Prepare datasets](#prepare-datasets)
+    - [TSKinFace](#tskinface)
+      - [Download](#download)
+- [Crop Faces from Image File](#crop-faces-from-image-file)
+- [Misc.](#misc)
 
 ## How to
 ### Setup
@@ -29,3 +31,12 @@ Tri-subject Kinship Face Database.
 
 ##### Download
 Download [here](http://parnec.nuaa.edu.cn/xtan/data/datasets/TSKinFace_Data.zip).
+
+## Crop Faces from Image File
+
+`python face_extractor.py FACE_IMG_PATH`
+
+Cropped files will export at FACE_IMG_PATH directory.
+
+## Misc.
+This program is brought by [Shin'ichiro SUZUKI](https://github.com/shin-sforzando) to [KUAD](https://www.kyoto-art.ac.jp) Design Project II A 2019.

@@ -38,5 +38,8 @@ Download [here](http://parnec.nuaa.edu.cn/xtan/data/datasets/TSKinFace_Data.zip)
 
 Cropped files will export at FACE_IMG_PATH directory.
 
+You can change the resolution to export with `-r` option.
+You can change the method of resize with `-i` option.
+
 ## Misc.
 This program is brought by [Shin'ichiro SUZUKI](https://github.com/shin-sforzando) to [KUAD](https://www.kyoto-art.ac.jp) Design Project II A 2019.

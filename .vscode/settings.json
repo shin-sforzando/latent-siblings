@@ -1,8 +1,11 @@
 {
-    "cSpell.words": [
-        "songcan",
-        "xiaoqian",
-        "xiaoyang"
-    ],
-    "python.pythonPath": "venv/bin/python3"
+  "cSpell.words": [
+    "imread",
+    "imwrite",
+    "secho",
+    "songcan",
+    "xiaoqian",
+    "xiaoyang"
+  ],
+  "python.pythonPath": "venv/bin/python3"
 }

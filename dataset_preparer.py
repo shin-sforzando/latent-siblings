@@ -49,7 +49,7 @@ def cmd(directory, split):
     for img in dataset_path.glob('**/*.jpg'):
         checking = cv2.imread(str(img))
         height, width, ch = checking.shape
-        click.secho(f'Height: {height} Width: {width} Channel: {ch}', fg='cyan')
+        click.secho(f'{img}: {height}x{width}/{ch}[ch]', fg='cyan')
         if ch != 3:
             click.secho(f'Channel Error: {checking}', fg='red')
 

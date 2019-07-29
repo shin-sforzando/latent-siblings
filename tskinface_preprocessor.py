@@ -9,7 +9,7 @@ import cv2
 SRC_DIR_PATH = Path('data/TSKinFace/cropped_FMSD_original')
 PRE_DIR_PATH = Path('data/TSKinFace/preprocessed')
 OUT_DIR_PATH = Path('data/TSKinFace/combined')
-
+RESOLUTION = 256
 
 def main():
     try:
@@ -30,7 +30,7 @@ def main():
             click.secho(f'Son: {img_s}', fg='blue')
             img_org_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-original-S.jpg'
             click.secho(f'Copy: {shutil.copyfile(img_s, img_org_s_path)}', fg='green')
-            resize_s = subprocess.run(f'mogrify -resize 128x128! {img_org_s_path}'.split())
+            resize_s = subprocess.run(f'mogrify -resize {RESOLUTION}x{RESOLUTION}! {img_org_s_path}'.split())
             click.secho(f'Resize: {resize_s}', fg='green')
             img_flopped_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-S.jpg'
             flop_s = subprocess.run(f'convert -flop {img_org_s_path} {img_flopped_s_path}'.split())
@@ -40,7 +40,7 @@ def main():
             click.secho(f'Daughter: {img_d}', fg='blue')
             img_org_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-original-D.jpg'
             click.secho(f'Copy: {shutil.copyfile(img_d, img_org_d_path)}', fg='green')
-            resize_d = subprocess.run(f'mogrify -resize 128x128! {img_org_d_path}'.split())
+            resize_d = subprocess.run(f'mogrify -resize {RESOLUTION}x{RESOLUTION}! {img_org_d_path}'.split())
             click.secho(f'Resize: {resize_d}', fg='green')
             img_flopped_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-D.jpg'
             flop_d = subprocess.run(f'convert -flop {img_org_d_path} {img_flopped_d_path}'.split())
@@ -81,7 +81,7 @@ def main():
             ''' Check '''
             checking = cv2.imread(str(img))
             height, width, ch = checking.shape
-            click.secho(f'Height: {height} Width: {width} Channel: {ch}', fg='cyan')
+            click.secho(f'{img}: {height}x{width}/{ch}[ch]', fg='cyan')
             if ch != 3:
                 click.secho(f'Channel Error: {checking}', fg='red')
 

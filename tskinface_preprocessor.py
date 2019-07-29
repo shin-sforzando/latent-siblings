@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 
 import click
+import cv2
 
 SRC_DIR_PATH = Path('data/TSKinFace/cropped_FMSD_original')
 PRE_DIR_PATH = Path('data/TSKinFace/preprocessed')
@@ -21,23 +22,29 @@ def main():
         OUT_DIR_PATH.mkdir(exist_ok=True)
 
         for img_s in SRC_DIR_PATH.glob('*-S.jpg'):
-            ''' Copy & Flop '''
             img_s = Path(img_s)
-            click.secho(f'Son: {img_s}', fg='blue')
             img_s_no = img_s.stem.split('-')[0]
             click.secho(f'Image No.: {img_s_no}', fg='magenta')
+
+            ''' Copy & Flop '''
+            click.secho(f'Son: {img_s}', fg='blue')
             img_org_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-original-S.jpg'
             click.secho(f'Copy: {shutil.copyfile(img_s, img_org_s_path)}', fg='green')
+            resize_s = subprocess.run(f'mogrify -resize 128x128! {img_org_s_path}'.split())
+            click.secho(f'Resize: {resize_s}', fg='green')
             img_flopped_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-S.jpg'
+            flop_s = subprocess.run(f'convert -flop {img_org_s_path} {img_flopped_s_path}'.split())
+            click.secho(f'Flop: {flop_s}', fg='green')
+
             img_d = SRC_DIR_PATH / f'{img_s_no}-D.jpg'
             click.secho(f'Daughter: {img_d}', fg='blue')
             img_org_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-original-D.jpg'
             click.secho(f'Copy: {shutil.copyfile(img_d, img_org_d_path)}', fg='green')
+            resize_d = subprocess.run(f'mogrify -resize 128x128! {img_org_d_path}'.split())
+            click.secho(f'Resize: {resize_d}', fg='green')
             img_flopped_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-D.jpg'
-            convert_s = subprocess.run(f'convert -flop {img_org_s_path} {img_flopped_s_path}'.split())
-            click.secho(f'Flop: {convert_s}', fg='green')
-            convert_d = subprocess.run(f'convert -flop {img_org_d_path} {img_flopped_d_path}'.split())
-            click.secho(f'Flop: {convert_d}', fg='green')
+            flop_d = subprocess.run(f'convert -flop {img_org_d_path} {img_flopped_d_path}'.split())
+            click.secho(f'Flop: {flop_d}', fg='green')
 
             ''' Append '''
             img_osod_path: Path = OUT_DIR_PATH / f'{img_s_no}-oSoD.jpg'
@@ -69,6 +76,14 @@ def main():
             ''' Normalize '''
             normalized = subprocess.run(f'mogrify -normalize {img}'.split())
             click.secho(f'Normalized: {normalized}', fg='green')
+
+        for img in OUT_DIR_PATH.glob('*.jpg'):
+            ''' Check '''
+            checking = cv2.imread(str(img))
+            height, width, ch = checking.shape
+            click.secho(f'Height: {height} Width: {width} Channel: {ch}', fg='cyan')
+            if ch != 3:
+                click.secho(f'Channel Error: {checking}', fg='red')
 
     except Exception as e:
         click.secho(f'Error: {e}', fg='red')

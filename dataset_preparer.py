@@ -6,6 +6,9 @@ import click
 
 
 # noinspection PyTypeChecker
+import cv2
+
+
 @click.command()
 @click.argument('directory', type=click.Path(exists=True, dir_okay=True, file_okay=False))
 @click.option('-s', '--split', default=0.2, help='Split ratio of train and validation')
@@ -35,12 +38,20 @@ def cmd(directory, split):
     test_path.mkdir(exist_ok=True)
 
     ''' Copy '''
-    for img_path in all_jpg_path[:val_num]:
-        shutil.copy(img_path, val_path)
-    for img_path in all_jpg_path[val_num:]:
-        shutil.copy(img_path, train_path)
-    for img_path in Path('data/test').glob('*.jpg'):
-        shutil.copy(img_path, test_path)
+    for idx, img_path in enumerate(all_jpg_path[:val_num]):
+        shutil.copy(img_path, val_path / f'{idx:03}.jpg')
+    for idx, img_path in enumerate(all_jpg_path[val_num:]):
+        shutil.copy(img_path, train_path / f'{idx:03}.jpg')
+    for idx, img_path in enumerate(Path('data/test').glob('*.jpg')):
+        shutil.copy(img_path, test_path / f'{idx:03}.jpg')
+
+    ''' Check '''
+    for img in dataset_path.glob('**/*.jpg'):
+        checking = cv2.imread(str(img))
+        height, width, ch = checking.shape
+        click.secho(f'Height: {height} Width: {width} Channel: {ch}', fg='cyan')
+        if ch != 3:
+            click.secho(f'Channel Error: {checking}', fg='red')
 
     ''' Archive '''
     shutil.make_archive(dataset_path, format='zip', root_dir=dataset_path)

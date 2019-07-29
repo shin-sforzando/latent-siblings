@@ -1,4 +1,5 @@
 # latent-siblings
+
 An attempt to generate latent siblings faces by Machine Learning.
 
 - [How to](#how-to)
@@ -6,13 +7,15 @@ An attempt to generate latent siblings faces by Machine Learning.
   - [Prepare datasets](#prepare-datasets)
     - [TSKinFace](#tskinface)
       - [Download](#download)
+      - [Preprocess](#preprocess)
 - [Crop Faces from Image File](#crop-faces-from-image-file)
 - [Misc.](#misc)
 
 ## How to
+
 ### Setup
 
-```
+```console
 pip install -r requirements.txt
 ```
 
@@ -30,11 +33,20 @@ Tri-subject Kinship Face Database.
 > Xiaoqian Qin, Xiaoyang Tan,Songcan Chen, Tri-Subject Kinship Verification: Understanding the Core of A Family.  IEEE Transactions on Multimedia, 2015
 
 ##### Download
+
 Download [here](http://parnec.nuaa.edu.cn/xtan/data/datasets/TSKinFace_Data.zip).
+
+##### Preprocess
+
+```console
+python tskinface_preprocessor.py
+```
 
 ## Crop Faces from Image File
 
-`python face_extractor.py FACE_IMG_PATH`
+```console
+python face_extractor.py FACE_IMG_PATH
+```
 
 Cropped files will export at FACE_IMG_PATH directory.
 
@@ -42,4 +54,5 @@ You can change the resolution to export with `-r` option.
 You can change the method of resize with `-i` option.
 
 ## Misc.
+
 This program is brought by [Shin'ichiro SUZUKI](https://github.com/shin-sforzando) to [KUAD](https://www.kyoto-art.ac.jp) Design Project II A 2019.

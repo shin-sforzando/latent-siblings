@@ -7,7 +7,7 @@ An attempt to generate latent siblings faces by Machine Learning.
   - [Prepare datasets](#prepare-datasets)
     - [TSKinFace](#tskinface)
       - [Download](#download)
-      - [Preprocess](#preprocess)
+      - [Preprocess and Combine](#preprocess-and-combine)
 - [Crop Faces from Image File](#crop-faces-from-image-file)
 - [Misc.](#misc)
 
@@ -36,11 +36,16 @@ Tri-subject Kinship Face Database.
 
 Download [here](http://parnec.nuaa.edu.cn/xtan/data/datasets/TSKinFace_Data.zip).
 
-##### Preprocess
+##### Preprocess and Combine
+
+Make the mirror image from Son's and Daughter's before combining.
 
 ```console
 python tskinface_preprocessor.py
 ```
+
+These preprocessed images are stored in `data/TSKinFace/preprocessed`.
+These combined images are stored in `data/TSKinFace/combined`.
 
 ## Crop Faces from Image File
 

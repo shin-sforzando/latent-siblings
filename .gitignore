@@ -302,5 +302,5 @@ modules.xml
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm+all,visualstudiocode
 
 ### Dataset ###
-# data/*
+data/*
 !data/test

@@ -8,6 +8,7 @@ An attempt to generate latent siblings faces by Machine Learning.
     - [TSKinFace](#tskinface)
       - [Download](#download)
       - [Preprocess and Combine](#preprocess-and-combine)
+      - [Arrange](#arrange)
 - [Crop Faces from Image File](#crop-faces-from-image-file)
 - [Misc.](#misc)
 
@@ -27,9 +28,9 @@ Tri-subject Kinship Face Database.
 
 > Copyright 2015, Xiaoyang Tan
 > The dataset is provided for research purposes to a researcher only and not for any commercial use. Please do not release the data or redistribute this link to anyone else without our permission. Contact {x.tan}@nuaa.edu.cn if any question.
-> 
+>
 > If you use this dataset, please cite it as,
-> 
+>
 > Xiaoqian Qin, Xiaoyang Tan,Songcan Chen, Tri-Subject Kinship Verification: Understanding the Core of A Family.  IEEE Transactions on Multimedia, 2015
 
 ##### Download
@@ -46,6 +47,16 @@ python tskinface_preprocessor.py
 
 These preprocessed images are stored in `data/TSKinFace/preprocessed`.
 These combined images are stored in `data/TSKinFace/combined`.
+
+##### Arrange
+
+Split combined images into the dataset.
+
+```console
+python dataset_preparer.py data/TSKinFace/combined -s 0.2
+```
+
+You can change the split ratio with `-s` option from default `0.2`.
 
 ## Crop Faces from Image File
 

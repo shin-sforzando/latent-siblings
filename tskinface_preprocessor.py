@@ -10,6 +10,7 @@ PRE_DIR_PATH = Path('data/TSKinFace/preprocessed')
 OUT_DIR_PATH = Path('data/TSKinFace/combined')
 RESOLUTION = 256
 
+
 def main():
     try:
         if subprocess.run('convert -version'.split()).returncode != 0:

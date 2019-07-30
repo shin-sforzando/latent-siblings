@@ -13,7 +13,7 @@ OpenCV HAAR XML Default Options
 * venv/lib/python3.7/site-packages/cv2/data/haarcascade_profileface.xml
 '''
 
-HAAR_XML = 'venv/lib/python3.7/site-packages/cv2/data/haarcascade_frontalface_default.xml'
+HAAR_XML = 'venv/lib/python3.7/site-packages/cv2/data/haarcascade_frontalface_alt.xml'
 INTERPOLATIONS = ['INTER_LINEAR', 'INTER_AREA', 'INTER_NEAREST', 'INTER_CUBIC', 'INTER_LANCZOS4']
 
 

@@ -4,7 +4,6 @@ import sys
 from pathlib import Path
 
 import click
-import cv2
 
 SRC_DIR_PATH = Path('data/TSKinFace/cropped_FMSD_original')
 PRE_DIR_PATH = Path('data/TSKinFace/preprocessed')
@@ -32,9 +31,9 @@ def main():
             click.secho(f'Copy: {shutil.copyfile(img_s, img_org_s_path)}', fg='green')
             resize_s = subprocess.run(f'mogrify -resize {RESOLUTION}x{RESOLUTION}! {img_org_s_path}'.split())
             click.secho(f'Resize: {resize_s}', fg='green')
-            img_flopped_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-S.jpg'
-            flop_s = subprocess.run(f'convert -flop {img_org_s_path} {img_flopped_s_path}'.split())
-            click.secho(f'Flop: {flop_s}', fg='green')
+            # img_flopped_s_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-S.jpg'
+            # flop_s = subprocess.run(f'convert -flop {img_org_s_path} {img_flopped_s_path}'.split())
+            # click.secho(f'Flop: {flop_s}', fg='green')
 
             img_d = SRC_DIR_PATH / f'{img_s_no}-D.jpg'
             click.secho(f'Daughter: {img_d}', fg='blue')
@@ -42,48 +41,35 @@ def main():
             click.secho(f'Copy: {shutil.copyfile(img_d, img_org_d_path)}', fg='green')
             resize_d = subprocess.run(f'mogrify -resize {RESOLUTION}x{RESOLUTION}! {img_org_d_path}'.split())
             click.secho(f'Resize: {resize_d}', fg='green')
-            img_flopped_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-D.jpg'
-            flop_d = subprocess.run(f'convert -flop {img_org_d_path} {img_flopped_d_path}'.split())
-            click.secho(f'Flop: {flop_d}', fg='green')
+            # img_flopped_d_path: Path = PRE_DIR_PATH / f'{img_s_no}-flopped-D.jpg'
+            # flop_d = subprocess.run(f'convert -flop {img_org_d_path} {img_flopped_d_path}'.split())
+            # click.secho(f'Flop: {flop_d}', fg='green')
 
             ''' Append '''
-            img_osod_path: Path = OUT_DIR_PATH / f'{img_s_no}-oSoD.jpg'
+            img_osod_path: Path = OUT_DIR_PATH / f'{img_s_no}-SD.jpg'
             # img_osfd_path: Path = OUT_DIR_PATH / f'{img_s_no}-oSfD.jpg'
             osod = subprocess.run(f'convert +append {img_org_s_path} {img_org_d_path} {img_osod_path}'.split())
             click.secho(f'Append: {osod}', fg='cyan')
             # osfd = subprocess.run(f'convert +append {img_org_s_path} {img_flopped_d_path} {img_osfd_path}'.split())
             # click.secho(f'Append: {osfd}', fg='cyan')
-            img_odos_path: Path = OUT_DIR_PATH / f'{img_s_no}-oDoS.jpg'
+            img_odos_path: Path = OUT_DIR_PATH / f'{img_s_no}-DS.jpg'
             # img_odfs_path: Path = OUT_DIR_PATH / f'{img_s_no}-oDfS.jpg'
             odos = subprocess.run(f'convert +append {img_org_d_path} {img_org_s_path} {img_odos_path}'.split())
             click.secho(f'Append: {odos}', fg='cyan')
-            # odfs = subprocess.run(f'convert +append {img_org_d_path} {img_flopped_s_path} {img_odfs_path}'.split())
-            # click.secho(f'Append: {odfs}', fg='cyan')
-            # img_fsod_path: Path = OUT_DIR_PATH / f'{img_s_no}-fSoD.jpg'
-            img_fsfd_path: Path = OUT_DIR_PATH / f'{img_s_no}-fSfD.jpg'
-            # fsod = subprocess.run(f'convert +append {img_flopped_s_path} {img_org_d_path} {img_fsod_path}'.split())
-            # click.secho(f'Append: {fsod}', fg='cyan')
-            fsfd = subprocess.run(f'convert +append {img_flopped_s_path} {img_flopped_d_path} {img_fsfd_path}'.split())
-            click.secho(f'Append: {fsfd}', fg='cyan')
-            # img_fdos_path: Path = OUT_DIR_PATH / f'{img_s_no}-fDoS.jpg'
-            img_fdfs_path: Path = OUT_DIR_PATH / f'{img_s_no}-fDfS.jpg'
-            # fdos = subprocess.run(f'convert +append {img_flopped_d_path} {img_org_s_path} {img_fdos_path}'.split())
-            # click.secho(f'Append: {fdos}', fg='cyan')
-            fdfs = subprocess.run(f'convert +append {img_flopped_d_path} {img_flopped_s_path} {img_fdfs_path}'.split())
-            click.secho(f'Append: {fdfs}', fg='cyan')
-
-        for img in OUT_DIR_PATH.glob('*.jpg'):
-            ''' Normalize '''
-            normalized = subprocess.run(f'mogrify -normalize {img}'.split())
-            click.secho(f'Normalized: {normalized}', fg='green')
-
-        for img in OUT_DIR_PATH.glob('*.jpg'):
-            ''' Check '''
-            checking = cv2.imread(str(img))
-            height, width, ch = checking.shape
-            click.secho(f'{img}: {height}x{width}/{ch}[ch]', fg='cyan')
-            if ch != 3:
-                click.secho(f'Channel Error: {checking}', fg='red')
+            # # odfs = subprocess.run(f'convert +append {img_org_d_path} {img_flopped_s_path} {img_odfs_path}'.split())
+            # # click.secho(f'Append: {odfs}', fg='cyan')
+            # # img_fsod_path: Path = OUT_DIR_PATH / f'{img_s_no}-fSoD.jpg'
+            # img_fsfd_path: Path = OUT_DIR_PATH / f'{img_s_no}-fSfD.jpg'
+            # # fsod = subprocess.run(f'convert +append {img_flopped_s_path} {img_org_d_path} {img_fsod_path}'.split())
+            # # click.secho(f'Append: {fsod}', fg='cyan')
+            # fsfd = subprocess.run(f'convert +append {img_flopped_s_path} {img_flopped_d_path} {img_fsfd_path}'.split())
+            # click.secho(f'Append: {fsfd}', fg='cyan')
+            # # img_fdos_path: Path = OUT_DIR_PATH / f'{img_s_no}-fDoS.jpg'
+            # img_fdfs_path: Path = OUT_DIR_PATH / f'{img_s_no}-fDfS.jpg'
+            # # fdos = subprocess.run(f'convert +append {img_flopped_d_path} {img_org_s_path} {img_fdos_path}'.split())
+            # # click.secho(f'Append: {fdos}', fg='cyan')
+            # fdfs = subprocess.run(f'convert +append {img_flopped_d_path} {img_flopped_s_path} {img_fdfs_path}'.split())
+            # click.secho(f'Append: {fdfs}', fg='cyan')
 
     except Exception as e:
         click.secho(f'Error: {e}', fg='red')

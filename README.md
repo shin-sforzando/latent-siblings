@@ -4,6 +4,8 @@ An attempt to generate latent siblings faces by Machine Learning.
 
 - [How to](#how-to)
   - [Setup](#setup)
+    - [ImageMagick](#imagemagick)
+    - [Python Libraries](#python-libraries)
   - [Prepare datasets](#prepare-datasets)
     - [TSKinFace](#tskinface)
       - [Download](#download)
@@ -14,6 +16,14 @@ An attempt to generate latent siblings faces by Machine Learning.
 ## How to
 
 ### Setup
+
+#### ImageMagick
+
+```console
+brew install imagemagick
+```
+
+#### Python Libraries
 
 ```console
 pip install -r requirements.txt
